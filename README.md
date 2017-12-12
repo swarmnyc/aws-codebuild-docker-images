@@ -23,6 +23,15 @@ $ docker run --privileged -it swarmnyc/aws-docker:1.13.1 /bin/bash
 # nohup /usr/local/bin/dockerd --host=unix:///var/run/docker.sock --host=tcp://0.0.0.0:2375 --storage-driver=overlay&
 ```
 
+### Use out-of-box docker images
+* AWS CodeBuild: Build projet
+    * Environment: How to build
+        * Environment images: Specify a Docker image
+        * Environment type: Linux
+        * Custom image type: Other
+        * Custom image ID: docker.io/swarmnyc/aws-docker:1.13.1 
+
+
 # Some documnets about Docker-in-Docker
 * [dind](https://github.com/jpetazzo/dind)
 * [Using Docker-in-Docker for your CI or testing environment?](http://jpetazzo.github.io/2015/09/03/do-not-use-docker-in-docker-for-ci/)
