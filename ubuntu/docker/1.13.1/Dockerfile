@@ -66,13 +66,6 @@ RUN set -x \
 # From the docker dind 1.11
     && apt-get update && apt-get install -y --no-install-recommends \
        e2fsprogs iptables xfsprogs xz-utils \
-# set up subuid/subgid so that "--userns-remap=default" works out-of-the-box
-    # && addgroup dockremap \
-    # && useradd -g dockremap dockremap \
-    # && echo 'dockremap:165536:65536' >> /etc/subuid \
-    # && echo 'dockremap:165536:65536' >> /etc/subgid \
-    # && wget "https://raw.githubusercontent.com/docker/docker/${DIND_COMMIT}/hack/dind" -O /usr/local/bin/dind \
-    # && chmod +x /usr/local/bin/dind \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
