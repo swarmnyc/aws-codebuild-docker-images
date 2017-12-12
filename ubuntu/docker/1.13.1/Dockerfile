@@ -42,6 +42,8 @@ RUN apt-get update \
 RUN wget "https://bootstrap.pypa.io/get-pip.py" -O /tmp/get-pip.py \
     && python /tmp/get-pip.py \
     && pip install awscli==1.11.25 \
+# https://github.com/fabfuel/ecs-deploy
+    && pip install ecs-deploy \
     && rm -fr /var/lib/apt/lists/* /tmp/* /var/tmp/* 
  
 
@@ -77,7 +79,7 @@ RUN set -x \
 VOLUME /var/lib/docker
 
 # Install node & typescript
-RUN curl -sL https://deb.nodesource.com/setup_7.x | bash - \
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
     && apt-get install nodejs -y \
     && npm install typescript -g \
     && rm -rf /var/lib/apt/lists/* \
