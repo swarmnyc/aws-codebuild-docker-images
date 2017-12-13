@@ -26,10 +26,12 @@ $ docker run --privileged -it swarmnyc/aws-docker:1.13.1 /bin/bash
 ### Use out-of-box docker images
 * AWS CodeBuild: Build projet
     * Environment: How to build
-        * Environment images: Specify a Docker image
-        * Environment type: Linux
-        * Custom image type: Other
-        * Custom image ID: docker.io/swarmnyc/aws-docker:1.13.1 
+        - Environment images: Specify a Docker image
+        - Environment type: Linux
+        - Custom image type: Other
+        - Custom image ID: docker.io/swarmnyc/aws-docker:1.13.1 
+    * Advanced settings
+        - [x] Privileged
 
 
 # Some documnets about Docker-in-Docker
