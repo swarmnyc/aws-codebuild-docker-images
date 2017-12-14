@@ -18,7 +18,7 @@ sudo /usr/bin/docker run -d -v /mnt/data/temp/teamcity:/opt/teamcity/temp -e SER
     swarmnyc/teamcity-agent:latest
 ```
 
-## Setup a service in coreos in AWS
+## Update the default service in AWS
 ```
 # Change service script:
 sudo vi /etc/systemd/system/teamcity-agent.service
@@ -26,4 +26,43 @@ sudo vi /etc/systemd/system/teamcity-agent.service
 sudo systemctl daemon-reload
 # Restart service:
 sudo systemctl restart teamcity-agent
+```
+The update will be gone if the ec2 instance reboot.
+If you want to permenantly make the change, change the service content in 
+* CloudFormation ==> TeamCity-BuildMachine
+    * Other Actions ==> View/Edit teamplate in Designer
+        * Template ==> Resouces ==> EC2Instance ==> Properties ==> UserData ==> coreos ==> units ==> name: "teamcity-agent.service"
+
+
+## Create a new service: 
+cat /etc/systemd/system/teamcity-agent-swarmnyc.service
+```
+[Unit]
+Description=TeamCity Agent
+After=teamcity-server.service coreos-metadata.service
+Requires=teamcity-server.service coreos-metadata.service
+
+[Service]
+EnvironmentFile=/etc/teamcity-version
+TimeoutStartSec=1200s
+EnvironmentFile=/run/metadata/coreos
+ExecStartPre=/bin/sh -c "docker images --filter 'before=swarmnyc/teamcity-agent:${TEAMCITY_VERSION}' --format '{{.ID}} {{.Repository}}' | grep 'swarmnyc/teamcity-agent' | grep -Eo '^[^ ]+' | xargs -r docker rmi"
+ExecStart=/usr/bin/docker run \
+  -v /mnt/data/temp/teamcity:/opt/teamcity/temp \
+  -e SERVER_URL=${COREOS_EC2_IPV4_LOCAL} \
+  -e AGENT_NAME=DockerCompose \
+  --name teamcity-agent-dc \
+  --privileged -e DOCKER_IN_DOCKER=start \
+  swarmnyc/teamcity-agent:${TEAMCITY_VERSION}
+ExecStop=-/usr/bin/docker stop teamcity-agent-dc
+ExecStopPost=-/usr/bin/docker rm teamcity-agent-dc
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+Enable and start it
+```
+sudo systemctl enable teamcity-agent-swarmnyc.service
+sudo systemctl start teamcity-agent-swarmnyc.service
 ```

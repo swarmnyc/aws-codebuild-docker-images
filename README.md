@@ -1,3 +1,6 @@
+# TeamCity Build Agent Docker image
+See [TeamCity Build Agent Image]
+
 # AWS CodeBuild curated Docker images
 
 This repository holds Dockerfiles of official AWS CodeBuild curated Docker images. Please refer to [the AWS CodeBuild User Guide](http://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref.html) for list of environments supported by AWS CodeBuild.
@@ -41,3 +44,4 @@ $ docker run --privileged -it swarmnyc/aws-docker:1.13.1 /bin/bash
 
 
 [Sample buildspec.yml]: http://docs.aws.amazon.com/codebuild/latest/userguide/sample-docker-custom-image.html#sample-docker-custom-image-files
+[TeamCity Build Agent Image]: https://github.com/swarmnyc/aws-codebuild-docker-images/tree/master/teamcity
