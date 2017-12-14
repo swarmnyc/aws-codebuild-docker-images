@@ -20,9 +20,16 @@ RUN curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-ke
     && apt-get -y update \
     && apt-get -y install google-chrome-stable
 
-# Install bzip2, used by Node v8.
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends bzip2
+# # Install bzip2, used by Node v8.
+# RUN apt-get update \
+#     && apt-get install -y --no-install-recommends bzip2
+
+# Install node & typescript
+RUN curl -sL https://deb.nodesource.com/setup_8.x | bash - \
+    && apt-get install nodejs -y \
+    && npm install typescript -g \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
 
 # Install docker-compose
 RUN curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-$(uname -s)-$(uname -m) > /usr/bin/docker-compose \
