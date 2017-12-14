@@ -20,11 +20,12 @@ RUN curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-ke
     && apt-get -y update \
     && apt-get -y install google-chrome-stable
 
+# Install zip, to zip code coverage report.
 # Install bzip2, used by Node v8.
 # Install node & typescript
 RUN set -x \
     && curl -sL https://deb.nodesource.com/setup_8.x | bash - \
-    && apt-get install nodejs bzip2 -y \
+    && apt-get install nodejs zip bzip2 -y \
     && npm -v \
     && npm install typescript -g \
     && rm -rf /var/lib/apt/lists/* \
