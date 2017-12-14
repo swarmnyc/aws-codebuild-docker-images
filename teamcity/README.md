@@ -1,11 +1,12 @@
 # How to Build and Push This Image
 ```
-docker build -t swarmnyc/teamcity-agent .
-docker push swarmnyc/teamcity-agent
+docker build -t swarmnyc/teamcity-agent:latest .
+docker push swarmnyc/teamcity-agent:latest
 
 # Tag a specified version for the image.
-docker tag swarmnyc/teamcity-agent swarmnyc/teamcity-agent:1.0.0
-docker push swarmnyc/teamcity-agent:1.0.0
+IMAGE_VERSION=1.0.0
+docker tag swarmnyc/teamcity-agent:latest swarmnyc/teamcity-agent:${IMAGE_VERSION}
+docker push swarmnyc/teamcity-agent:${IMAGE_VERSION}
 ```
 
 # How to Use This Image
