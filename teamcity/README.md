@@ -1,3 +1,8 @@
+
+![teamcity_status][tc_status_logo]
+
+[tc_status_logo]: http://34.224.141.66/app/rest/builds/buildType:BuildAgentDockerImages_Build/statusIcon "Powered by TeamCity"
+
 # How to Build and Push This Image
 ```
 docker build -t swarmnyc/teamcity-agent:latest .
