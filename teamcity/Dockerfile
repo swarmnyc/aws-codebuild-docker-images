@@ -15,7 +15,7 @@ ENV DOCKER_COMPOSE_VERSION="1.13.0"
 
 # Install build & util tools.
 RUN apt-get -y update \
-    apt-get install -y --no-install-recommends \
+    && apt-get install -y --no-install-recommends \
        wget python python2.7-dev fakeroot ca-certificates tar gzip zip \
        autoconf automake bzip2 file g++ gcc imagemagick libbz2-dev libc6-dev libcurl4-openssl-dev \
        libdb-dev libevent-dev libffi-dev libgeoip-dev libglib2.0-dev libjpeg-dev libkrb5-dev \
